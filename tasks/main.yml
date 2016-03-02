@@ -1,0 +1,14 @@
+---
+- yum: pkg={{ item }} state=installed
+  with_items:
+  - selinux-policy-{{ selinux_policy }}
+  - policycoreutils-python
+  # for debugging 
+  - setools-console
+
+- shell: setenforce 1
+  when: selinux_disabled is not defined and ansible_selinux.mode == 'permissive'
+
+- template: dest=/etc/selinux/config src=config
+
+- template: dest=/etc/selinux/semanage.conf src=semanage.conf
