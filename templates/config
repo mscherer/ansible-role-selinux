@@ -1,2 +1,3 @@
+# {{ ansible_managed }}
 SELINUX=enforcing
 SELINUXTYPE={{ selinux_policy }}
