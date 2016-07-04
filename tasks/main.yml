@@ -6,6 +6,8 @@
   - policycoreutils-python
   # for debugging 
   - setools-console
+  # to have proper logs (normaly installed by default but…)
+  - audit
 
 - name: Set state to enforcing
   shell: setenforce 1
@@ -16,3 +18,10 @@
   with_items:
   - config
   - semanage.conf
+
+- name: start auditd service
+  service:
+    name: auditd
+    enabled: yes
+    state: started
+
