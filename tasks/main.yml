@@ -8,6 +8,17 @@
   - setools-console
   # to have proper logs (normaly installed by default but…)
   - audit
+  - policycoreutils
+
+- name: Install packages on recent distribution
+  package:
+    pkg: "{{ item }}"
+    state: installed
+  with_items:
+  # for debugging
+  - setools-console
+  - policycoreutils-python
+  when: ansible_os_family == 'RedHat' and ansible_distribution_major_version >= '6'
 
 - name: Set state to enforcing
   shell: setenforce 1
