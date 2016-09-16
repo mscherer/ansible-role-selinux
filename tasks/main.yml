@@ -4,7 +4,7 @@
   with_items:
   - selinux-policy-{{ selinux_policy }}
   - policycoreutils-python
-  # for debugging 
+  # for debugging
   - setools-console
 
 - name: Set state to enforcing
