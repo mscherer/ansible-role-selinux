@@ -21,7 +21,7 @@
   when: ansible_os_family == 'RedHat' and ansible_distribution_major_version >= '6'
 
 - name: Set state to enforcing
-  shell: setenforce 1
+  command: setenforce 1
   when: selinux_disabled is not defined and ansible_selinux.mode == 'permissive'
 
 - name: Deploy configuration
