@@ -1,6 +1,8 @@
 ---
 - name: Install the packages
-  package: pkg={{ item }} state=installed
+  package:
+    pkg: "{{ item }}"
+    state: "installed"
   with_items:
   - selinux-policy-{{ selinux_policy }}
   - policycoreutils-python
@@ -25,12 +27,14 @@
   when: selinux_disabled is not defined and ansible_selinux.mode == 'permissive'
 
 - name: Deploy configuration
-  template: dest=/etc/selinux/{{ item }} src={{ item }}
+  template:
+    dest: "/etc/selinux/{{ item }}"
+    src: "{{ item }}"
   with_items:
   - config
   - semanage.conf
 
-- name: start auditd service
+- name: Start auditd service
   service:
     name: auditd
     enabled: yes
