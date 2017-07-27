@@ -4,14 +4,17 @@ galaxy_info:
   description: Ansible module to enforce SELinux policies
   company: Red Hat
   license: MIT
-  min_ansible_version: 1.2
-  # Only tested with EL 7. No reason anything do
-  # not work anywhere else, just no time to test.
-  # I would welcome patches
+  min_ansible_version: 2.0
   platforms:
   - name: EL
     versions:
     - 7
+    - 6
+  - name: Fedora
+    versions:
+    - 24
+    - 25
+    - 26
   categories:
   - system
 dependencies:
