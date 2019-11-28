@@ -5,12 +5,19 @@
     state: "installed"
   with_items:
   - selinux-policy-{{ selinux_policy }}
-  - policycoreutils-python
   # for debugging
   - setools-console
   # to have proper logs (normaly installed by default but…)
   - audit
   - policycoreutils
+
+- name: Install packages on older distribution
+  package:
+    pkg: "{{ item }}"
+    state: installed
+  with_items:
+  - policycoreutils-python
+  when: ansible_distribution_major_version|int < 8
 
 - name: Install packages on recent distribution
   package:
@@ -18,7 +25,7 @@
     state: installed
   with_items:
   - policycoreutils-python-utils
-  when: ansible_os_family == 'Fedora'
+  when: ansible_os_family == 'Fedora' or ansible_distribution_major_version|int >= 8
 
 - name: Set state to enforcing
   command: setenforce 1
